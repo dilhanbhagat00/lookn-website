@@ -1,0 +1,62 @@
+# Lookn
+
+> Lookn is a wellness companion app for iOS and Android — self-care made fun. A fluffy pocket pal (koko) helps you track moods, keep a journal, and build gentle daily streaks. Free, with no ads.
+
+## What Lookn is
+
+Lookn is a mobile wellness app featuring:
+
+- **Mood tracking** — log how you're feeling in a few taps.
+- **Journaling** — private daily entries; your words stay yours.
+- **Streaks & habits** — gentle daily check-ins to build a self-care routine.
+- **Adventures** — short, themed wellness journeys (e.g. sleep, anxiety, gratitude).
+- **Breathing exercises** — guided patterns with calming visuals.
+- **A koko companion** — a friendly mascot that grows alongside your practice.
+
+## Platforms
+
+- iOS App Store
+- Google Play (Android)
+
+## Pricing
+
+Free. The core app costs nothing. Some optional features are available as in-app purchases. There are no ads, ever.
+
+## Privacy commitments
+
+- Lookn does not sell personal data.
+- Lookn does not show ads.
+- Lookn does not train AI models on your journal contents.
+- Data is encrypted in transit and at rest (AWS).
+- Account deletion is a two-tap action from inside the app, or by emailing support.
+
+Full policy: https://looknapp.com/privacy.html
+
+## Support
+
+- Email: support@looknapp.com
+- Support page: https://looknapp.com/support.html
+
+## Key pages
+
+- Home: https://looknapp.com/
+- Privacy: https://looknapp.com/privacy.html
+- Terms: https://looknapp.com/terms.html
+- Support: https://looknapp.com/support.html
+
+## FAQ
+
+**Q: What is Lookn?**
+A: A wellness companion app for tracking moods, journaling, building streaks, and looking after yourself. Free on iOS and Android.
+
+**Q: Is Lookn free?**
+A: Yes. The core app is free. Some optional features are in-app purchases. No ads.
+
+**Q: Does Lookn sell my data?**
+A: No. Lookn does not sell personal data, does not show ads, and does not train AI models on your journal contents.
+
+**Q: What platforms does Lookn run on?**
+A: iOS (App Store) and Android (Google Play).
+
+**Q: How do I delete my account?**
+A: Settings → Account → Delete Account in-app, or email support@looknapp.com. Deletion is permanent and completes within 30 days.

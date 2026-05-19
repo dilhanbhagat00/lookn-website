@@ -1,0 +1,832 @@
+/* ============================================================
+   Lookn website — single shared stylesheet. DRY, modern, ~16 KB.
+   ============================================================ */
+
+:root {
+  /* Brand — from the Lookn RN client (constants/colors.js). */
+  --lookn-green:        #66CE63;
+  --lookn-green-shadow: #3AB54A;
+
+  /* Sky — sampled from the koko illustration so the gradient meets the
+     image's sky band seamlessly. */
+  --sky-top:    #C7EAF8;
+  --sky-mid:    #B0DEF1;
+  --sky-bot:    #9DD2E8;
+
+  /* Text */
+  --ink:        #1F3D2A;     /* deep mossy green-black */
+  --ink-muted:  #5C7263;
+  --ink-soft:   #93A294;
+
+  /* Surface */
+  --page-bg:    #FFFAF0;
+  --hairline:   rgba(31, 61, 42, 0.08);
+
+  /* Radius */
+  --r-pill:     28px;
+  --r-pill-sm:  19px;
+  --r-lg:       20px;
+  --r-md:       14px;
+
+  /* Motion */
+  --btn-spring: 140ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --btn-press:   60ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Illustration height — single source of truth. */
+  --scene-h:    clamp(220px, 38vh, 380px);
+}
+
+/* ---- Reset ---- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: "Fredoka", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--page-bg);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   HERO — content over a full-bleed illustration.
+
+   Layer 1: .hero__bg     Full-bleed illustration (mobile / desktop
+                          via <picture>). LCP candidate.
+   Layer 2: .hero__veil   Frosted sky-blue gradient overlay on the
+                          TOP of the screen, fading to transparent
+                          at the bottom. backdrop-filter blur for
+                          glassmorphism. Lets text read without
+                          per-glyph halos.
+   Layer 3: .hero__shell  Brand + headline + sub + CTAs + proof.
+   Layer 4: .hero__legal  Floating white pill at the very bottom.
+   ============================================================ */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--sky-top);
+  isolation: isolate;
+}
+
+/* ----- Layer 1: full-bleed illustration as a CSS bg ----------- */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    url("2.png") center bottom / cover no-repeat,
+    var(--sky-top);
+}
+
+/* ----- Layer 2: content shell --------------------------------- */
+.hero__shell {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;      /* left-align everything */
+  text-align: left;
+  padding-top: max(env(safe-area-inset-top, 0px), 24px);
+  padding-right: clamp(16px, 5vw, 32px);
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 60px);
+  padding-left: max(env(safe-area-inset-left, 0px), 16px);
+}
+
+/* ----- Brand mark (top, flat, no badge bg) -------------------- */
+.hero__top {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: clamp(20px, 6vh, 48px);
+}
+.hero__logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(31, 61, 42, 0.18));
+}
+.hero__brand {
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  /* Subtle white outline for readability against the illustration. */
+  -webkit-text-stroke: 4px #fff;
+  paint-order: stroke fill;
+}
+
+/* ----- Corner icon (Finch-style floating badge, bottom-right) -- */
+.hero__corner {
+  position: absolute;
+  z-index: 3;
+  right: max(env(safe-area-inset-right, 0px), 14px);
+  bottom: max(env(safe-area-inset-bottom, 0px), 14px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow:
+    0 1px 0 rgba(31, 61, 42, 0.06),
+    0 10px 24px rgba(31, 61, 42, 0.20);
+  overflow: hidden;
+  transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.hero__corner:hover { transform: translateY(-2px) rotate(-2deg); }
+.hero__corner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ----- Left-aligned content column ---------------------------- */
+.hero__copy {
+  width: 100%;
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Headline. Dark green-ink with a subtle white outline so it reads
+   on any part of the illustration. Brand-green "fun". */
+.hero__title {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 700;
+  font-size: clamp(34px, 8.5vw, 56px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 14px;
+  -webkit-text-stroke: 8px #fff;
+  paint-order: stroke fill;
+  text-align: left;
+}
+.hero__title em {
+  font-style: normal;
+  color: var(--lookn-green-shadow);
+}
+
+/* Sub-headline. Thinner white outline. */
+.hero__sub {
+  margin: 0 0 30px;
+  font-weight: 500;
+  font-size: clamp(15px, 4vw, 18px);
+  line-height: 1.45;
+  color: var(--ink);
+  max-width: 440px;
+  -webkit-text-stroke: 3px #fff;
+  paint-order: stroke fill;
+  text-align: left;
+}
+
+/* ----- CTAs --------------------------------------------------- */
+.hero__cta {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+  width: 100%;
+}
+.hero__cta .btn--store {
+  width: 100%;
+  max-width: 280px;
+}
+.hero__cta .btn--store img {
+  width: 100%;
+  height: auto;
+  max-height: 60px;
+  object-fit: contain;
+}
+
+/* ----- Social proof — star + trust signals -------------------- */
+.hero__proof {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 22px 0 0;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.005em;
+  color: var(--ink);
+  -webkit-text-stroke: 3px #fff;
+  paint-order: stroke fill;
+}
+.hero__proof-star { -webkit-text-stroke: 0; }
+.hero__proof-star {
+  color: var(--lookn-warm, #F7B638);
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* ----- Legal pill — floating chip at the very bottom ----------
+   Layered above the scene illustration with a real white surface.
+   Premium feel, no halo trickery, readable on grass. */
+.hero__legal {
+  position: absolute;
+  z-index: 3;
+  bottom: max(env(safe-area-inset-bottom, 0px), 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 7px 8px;
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 999px;
+  box-shadow:
+    0 1px 0 rgba(31, 61, 42, 0.04),
+    0 8px 22px rgba(31, 61, 42, 0.15);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  color: var(--ink);
+}
+.hero__legal a {
+  color: var(--ink);
+  padding: 4px 10px;
+  border-radius: 999px;
+  transition: color 120ms ease, background 120ms ease;
+}
+.hero__legal a:hover {
+  color: var(--lookn-green-shadow);
+  background: rgba(102, 206, 99, 0.12);
+}
+.hero__legal a:focus-visible {
+  outline: 2px solid var(--lookn-green);
+  outline-offset: 1px;
+}
+.hero__legal span {
+  color: var(--ink-soft);
+  opacity: 0.4;
+  font-size: 10px;
+}
+
+/* ----- Tight viewports (small phones, landscape) -------------- */
+@media (max-height: 700px) {
+  :root { --scene-h: clamp(180px, 30vh, 280px); }
+  .hero__top { margin-bottom: 12px; }
+  .hero__brand-badge { width: 44px; height: 44px; }
+  .hero__logo { width: 48px; height: 48px; }
+  .hero__brand { font-size: 19px; }
+  .hero__title { font-size: clamp(30px, 7.5vw, 44px); margin-bottom: 10px; }
+  .hero__sub { margin-bottom: 20px; font-size: clamp(14px, 3.5vw, 16px); }
+  .hero__cta { gap: 10px; }
+  .hero__cta .btn--store img { max-height: 54px; }
+  .hero__proof { margin-top: 16px; font-size: 13px; }
+}
+@media (max-width: 360px) {
+  .hero__title { font-size: clamp(30px, 8.5vw, 40px); }
+  .hero__cta .btn--store img { max-height: 54px; }
+}
+
+/* ----- Desktop ------------------------------------------------
+   Content shifts to the LEFT side of the screen so the koko + dome
+   on the landscape illustration stay visible on the right. */
+@media (min-width: 769px) {
+  .hero__bg {
+    /* Anchor right so the kokos + dome stay visible next to the
+       left-aligned hero copy. */
+    background:
+      url("2.png") right center / cover no-repeat,
+      var(--sky-top);
+  }
+
+  .hero__shell {
+    /* Everything hugs the LEFT edge — content lives in the left third,
+       koko + dome breathe on the right. */
+    max-width: none;
+    margin: 0;
+    align-items: flex-start;
+    text-align: left;
+    padding-top: clamp(32px, 4vw, 56px);
+    padding-right: clamp(20px, 5vw, 64px);
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 80px);
+    padding-left: clamp(20px, 4vw, 56px);
+  }
+  .hero__top { margin-bottom: clamp(28px, 6vh, 56px); }
+  .hero__logo { width: 72px; height: 72px; }
+  .hero__brand { font-size: 28px; }
+
+  .hero__copy {
+    align-items: flex-start;
+    text-align: left;
+    max-width: 580px;
+    margin-top: clamp(24px, 6vh, 80px);
+  }
+  .hero__title {
+    font-size: clamp(56px, 6.5vw, 96px);
+    margin-bottom: 22px;
+    -webkit-text-stroke: 10px #fff;
+  }
+  .hero__sub {
+    font-size: clamp(17px, 1.6vw, 22px);
+    max-width: 480px;
+    margin-bottom: 36px;
+    -webkit-text-stroke: 4px #fff;
+  }
+
+  .hero__cta {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 16px;
+    align-items: center;
+  }
+  .hero__cta .btn--store { width: auto; max-width: none; }
+  .hero__cta .btn--store img { width: auto; max-height: 64px; }
+
+  .hero__proof { margin-top: 26px; font-size: 15px; justify-content: flex-start; }
+}
+
+/* ============================================================
+   Buttons — SmartButton recipe (Lookn RN client). DRY.
+   ============================================================ */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 56px;
+  padding: 0 28px;
+  border: 0;
+  border-radius: var(--r-pill);
+  font-family: "Fredoka", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.005em;
+  color: #fff;
+  background: var(--lookn-green);
+  box-shadow: 0 8px 0 0 var(--lookn-green-shadow);
+  transform: translateY(0);
+  transition:
+    transform var(--btn-spring),
+    background-color 100ms ease-out,
+    box-shadow var(--btn-spring),
+    filter 100ms ease-out;
+  will-change: transform, box-shadow;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 0 0 var(--lookn-green-shadow);
+  filter: brightness(1.04);
+}
+.btn:active {
+  transform: translateY(8px);
+  box-shadow: 0 0 0 0 var(--lookn-green-shadow);
+  transition-duration: var(--btn-press);
+}
+.btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.btn--full { width: 100%; }
+
+/* App Store / Play Store badges. SOFT shadow only (Finch-style) —
+   they sit clean on the sky, not stamped onto the illustration. */
+.btn--store {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-md);
+  background: transparent;
+  box-shadow: 0 4px 14px rgba(31, 61, 42, 0.12);
+  transform: translateY(0);
+  transition:
+    transform var(--btn-spring),
+    box-shadow var(--btn-spring),
+    filter 100ms ease-out;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+}
+.btn--store:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(31, 61, 42, 0.16);
+  filter: brightness(1.04);
+}
+.btn--store:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(31, 61, 42, 0.12);
+  transition-duration: var(--btn-press);
+}
+.btn--store:focus-visible { outline: 3px solid var(--lookn-green); outline-offset: 3px; }
+.btn--store img {
+  display: block;
+  height: 60px;
+  width: auto;
+  border-radius: var(--r-md);
+}
+
+/* Chip button (legal links / sub-page footers). */
+.btn--chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: var(--r-pill-sm);
+  background: #fff;
+  color: var(--ink);
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 5px 0 0 rgba(31, 61, 42, 0.18);
+  transform: translateY(0);
+  transition:
+    transform var(--btn-spring),
+    box-shadow var(--btn-spring),
+    color 100ms ease-out;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
+}
+.btn--chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0 0 rgba(31, 61, 42, 0.22);
+  color: var(--lookn-green-shadow);
+}
+.btn--chip:active {
+  transform: translateY(5px);
+  box-shadow: 0 0 0 0 rgba(31, 61, 42, 0.18);
+  transition-duration: var(--btn-press);
+}
+.btn--chip:focus-visible { outline: 3px solid var(--lookn-green); outline-offset: 3px; }
+
+/* ============================================================
+   Sub-pages — Privacy / Terms / Support
+   ============================================================ */
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding-top: 22px;
+  justify-content: center;
+}
+
+.shell {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: clamp(20px, 6vw, 48px) clamp(18px, 5vw, 32px) 80px;
+}
+.shell__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  color: var(--ink-muted);
+  font-weight: 500;
+  font-size: 14px;
+}
+.shell__back:hover { color: var(--lookn-green-shadow); }
+.shell h1 {
+  font-weight: 600;
+  font-size: clamp(28px, 5vw, 36px);
+  letter-spacing: -0.015em;
+  margin: 0 0 6px;
+}
+.shell__sub {
+  color: var(--ink-muted);
+  font-size: 14px;
+  margin: 0 0 28px;
+}
+.shell h2 {
+  font-weight: 600;
+  font-size: 20px;
+  margin: 28px 0 8px;
+  letter-spacing: -0.01em;
+}
+.shell p, .shell li {
+  font-size: 16px;
+  color: var(--ink);
+  line-height: 1.65;
+}
+.shell ul { padding-left: 22px; }
+.shell li { margin-bottom: 6px; }
+.shell a {
+  color: var(--lookn-green-shadow);
+  font-weight: 500;
+  border-bottom: 1px solid currentColor;
+}
+
+.card {
+  background: #fff;
+  border-radius: var(--r-lg);
+  padding: 18px 20px;
+  margin: 14px 0 24px;
+  box-shadow:
+    0 1px 0 rgba(31, 61, 42, 0.04),
+    0 8px 24px rgba(31, 61, 42, 0.06);
+}
+.card h2:first-child { margin-top: 0; }
+
+.fourohfour {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  background: var(--page-bg);
+}
+.fourohfour img { width: 96px; height: 96px; border-radius: 22px; margin-bottom: 18px; }
+
+/* ============================================================
+   ABOUT — crawler-rich content between hero and footer. Cream
+   surface, generous reading width, two-column features on
+   desktop, single column on mobile.
+   ============================================================ */
+
+.about {
+  background: var(--page-bg);
+  color: var(--ink);
+  padding: clamp(40px, 7vw, 80px) clamp(20px, 5vw, 32px);
+}
+.about__inner {
+  max-width: 920px;
+  margin: 0 auto;
+}
+.about__lead h2 {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 700;
+  font-size: clamp(26px, 4vw, 38px);
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 0 0 14px;
+  line-height: 1.15;
+}
+.about__lead p {
+  font-size: clamp(15px, 1.6vw, 17px);
+  color: var(--ink-muted);
+  line-height: 1.65;
+  margin: 0 0 32px;
+  max-width: 720px;
+}
+.about__h3 {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  font-size: clamp(18px, 2.2vw, 22px);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 28px 0 14px;
+}
+.about__features {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.about__features li {
+  background: #fff;
+  border-radius: var(--r-md);
+  padding: 14px 18px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink);
+  box-shadow: 0 1px 0 rgba(31, 61, 42, 0.04), 0 6px 16px rgba(31, 61, 42, 0.05);
+}
+.about__features strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+.about__faq {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.about__faq details {
+  background: #fff;
+  border-radius: var(--r-md);
+  padding: 14px 18px;
+  box-shadow: 0 1px 0 rgba(31, 61, 42, 0.04), 0 6px 16px rgba(31, 61, 42, 0.05);
+}
+.about__faq summary {
+  cursor: pointer;
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ink);
+  list-style: none;
+  position: relative;
+  padding-right: 28px;
+}
+.about__faq summary::-webkit-details-marker { display: none; }
+.about__faq summary::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ink-soft);
+  transition: transform 180ms ease;
+}
+.about__faq details[open] summary::after {
+  transform: translateY(-50%) rotate(45deg);
+}
+.about__faq details p {
+  margin: 10px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+.about__faq details a {
+  color: var(--lookn-green-shadow);
+  font-weight: 500;
+  border-bottom: 1px solid currentColor;
+}
+@media (min-width: 769px) {
+  .about__features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+/* ============================================================
+   FOOTER — Finch-style band. Uses width: brand block on the
+   left, link columns on the right, social chips + copyright in
+   one bottom strip. Tight vertical rhythm (~200px on desktop).
+   SmartButton recipe on social chips (white pill, flat colored
+   shadow stub, presses down on tap).
+   ============================================================ */
+
+.footer {
+  background: var(--page-bg);
+  border-top: 1px solid var(--hairline);
+  color: var(--ink);
+  padding: clamp(28px, 4vw, 40px) clamp(20px, 5vw, 48px) clamp(16px, 2.5vw, 22px);
+}
+
+.footer__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(20px, 3vw, 32px);
+  align-items: start;
+}
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 420px;
+}
+.footer__brand-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.footer__brand-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  box-shadow: 0 1px 0 rgba(31, 61, 42, 0.05), 0 4px 12px rgba(31, 61, 42, 0.10);
+}
+.footer__brand-name {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.footer__tagline {
+  margin: 0;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
+
+.footer__cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 3vw, 32px);
+}
+.footer__col-title {
+  margin: 0 0 8px;
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.footer__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.footer__list a {
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 120ms ease;
+}
+.footer__list a:hover { color: var(--lookn-green-shadow); }
+
+.footer__bottom {
+  max-width: 1180px;
+  margin: clamp(18px, 2.5vw, 24px) auto 0;
+  padding-top: clamp(12px, 2vw, 18px);
+  border-top: 1px solid var(--hairline);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.footer__copyright {
+  font-size: 12px;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
+/* SmartButton recipe — circular social chip. White surface, flat
+   colored shadow underneath, presses down on tap. */
+.footer__social {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.btn--social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 4px 0 0 rgba(31, 61, 42, 0.16);
+  transform: translateY(0);
+  transition:
+    transform var(--btn-spring),
+    box-shadow var(--btn-spring),
+    color 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn--social:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 0 rgba(31, 61, 42, 0.20);
+  color: var(--lookn-green-shadow);
+}
+.btn--social:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 0 rgba(31, 61, 42, 0.16);
+  transition-duration: var(--btn-press);
+}
+.btn--social:focus-visible {
+  outline: 3px solid var(--lookn-green);
+  outline-offset: 3px;
+}
+.btn--social svg { display: block; }
+
+/* Desktop layout: brand left, link columns right. Single row. */
+@media (min-width: 769px) {
+  .footer__inner {
+    grid-template-columns: 1.2fr 2fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: start;
+  }
+}

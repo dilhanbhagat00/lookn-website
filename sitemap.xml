@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://looknapp.com/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://looknapp.com/assets/2.png</image:loc>
+      <image:title>Lookn — two koko characters in front of a cozy dome home</image:title>
+      <image:caption>Self-care, made fun. Mood tracking, journaling, and tiny daily wins with your koko companion.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://looknapp.com/assets/icon.png</image:loc>
+      <image:title>Lookn app icon</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://looknapp.com/privacy.html</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://looknapp.com/terms.html</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://looknapp.com/support.html</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>
