@@ -67,26 +67,44 @@ body::-webkit-scrollbar-thumb:hover {
 .cookie-banner {
   position: fixed;
   z-index: 1000;
-  left: clamp(12px, 3vw, 24px);
-  right: clamp(12px, 3vw, 24px);
-  bottom: clamp(12px, 3vw, 24px);
-  max-width: 520px;
-  margin: 0 auto;
-  padding: 16px 18px 18px;
+  left: clamp(12px, 3vw, 20px);
+  right: clamp(12px, 3vw, 20px);
+  bottom: clamp(12px, 3vw, 20px);
+  padding: 14px 16px 16px;
   background: #fff;
   border-radius: var(--r-lg);
-  box-shadow: 0 1px 0 rgba(31, 61, 42, 0.06), 0 18px 40px rgba(31, 61, 42, 0.18);
-  animation: cookie-rise 280ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  box-shadow:
+    0 1px 0 rgba(31, 61, 42, 0.04),
+    0 28px 56px -16px rgba(31, 61, 42, 0.22);
+  animation: cookie-slide-up 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-@keyframes cookie-rise {
-  from { transform: translateY(12px); opacity: 0; }
-  to   { transform: translateY(0);    opacity: 1; }
+.cookie-banner--leaving {
+  animation: cookie-slide-down 220ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+@keyframes cookie-slide-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+@keyframes cookie-slide-down {
+  from { transform: translateY(0);     opacity: 1; }
+  to   { transform: translateY(16px);  opacity: 0; }
+}
+
+.cookie-banner__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 6px;
+}
+.cookie-banner__icon {
+  font-size: 18px;
+  line-height: 1;
 }
 .cookie-banner__title {
   font-family: "Fredoka", sans-serif;
   font-weight: 600;
-  font-size: 14px;
-  margin: 0 0 4px;
+  font-size: 15px;
+  margin: 0;
   color: var(--ink);
 }
 .cookie-banner__msg {
@@ -102,14 +120,25 @@ body::-webkit-scrollbar-thumb:hover {
 }
 .cookie-banner__actions {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+  align-items: center;
 }
 .cookie-banner .btn--primary,
 .cookie-banner .btn--chip {
-  height: 38px;
-  padding: 0 16px;
+  height: 36px;
+  padding: 0 14px;
   font-size: 13px;
+  border-radius: 999px;
+}
+
+@media (min-width: 640px) {
+  .cookie-banner {
+    right: auto;
+    max-width: 360px;
+    bottom: 24px;
+    left: 24px;
+  }
 }
 
 body {
