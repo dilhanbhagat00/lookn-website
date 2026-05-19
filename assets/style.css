@@ -1597,3 +1597,126 @@ html { scroll-behavior: smooth; }
     align-items: start;
   }
 }
+
+/* ============================================================
+   MOBILE FIXES
+   ============================================================ */
+
+/* Footer email overflow: long support@looknapp.com address pushes
+   the page horizontally on narrow viewports. Two fixes:
+   1. Stack the 3 footer columns to 1 column below 480px so each
+      column gets the full width instead of ~107px.
+   2. Allow the email/link to break on any character if it must,
+      so it can't blow past the viewport edge regardless. */
+.footer__list a {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+@media (max-width: 480px) {
+  .footer__cols {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Landing hero on mobile: pump up the title size + give the subtitle
+   more presence so the "How can we help?" headline carries the page. */
+@media (max-width: 480px) {
+  .help-hero {
+    padding-top: 28px;
+    padding-bottom: 24px;
+  }
+  .help-hero__title {
+    font-size: 38px;
+    margin-bottom: 12px;
+  }
+  .help-hero__sub {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .help-hero__wordmark { font-size: 20px; }
+  .help-hero__mark { width: 32px; height: 32px; }
+}
+
+/* Touch devices: prevent the iOS Safari "first tap shows hover,
+   second tap activates" trap. On hover-capable devices nothing
+   changes; on touch devices we re-state the resting visual
+   appearance under :hover so synthesized hover doesn't stick. */
+@media (hover: none) {
+  /* Buttons */
+  .btn--primary:hover {
+    box-shadow: 0 8px 0 0 var(--lookn-green-shadow);
+    filter: none;
+    transform: none;
+  }
+  .btn--chip:hover {
+    background: #fff;
+    color: #1A1A1A;
+    box-shadow: 0 5px 0 0 #E8E8E8;
+    transform: none;
+  }
+  .btn--social:hover {
+    background: #fff;
+    color: #1A1A1A;
+    box-shadow: 0 4px 0 0 #E8E8E8;
+    transform: none;
+  }
+  :where(.btn--primary, .btn--chip, .btn--social, .btn--store):hover {
+    transform: none;
+  }
+
+  /* Help bar back chip */
+  .help-bar__back:hover {
+    background: transparent;
+    color: var(--ink);
+  }
+
+  /* Category cards + list items */
+  .help-catcard:hover {
+    background: #fff;
+    border-color: #ECE8E0;
+  }
+  .help-catcard__list a:hover {
+    background: transparent;
+    color: var(--ink);
+  }
+  .help-catcard__list a:hover::after {
+    opacity: 0.4;
+    transform: translateX(0);
+    color: var(--ink-soft);
+  }
+
+  /* FAQ accordion + related articles */
+  .help-q:hover { border-color: #ECE8E0; }
+  .help-article .help-q:hover { background: #fff; }
+  .help-article__related a:hover {
+    background: transparent;
+    color: var(--ink);
+  }
+
+  /* TOC rail (desktop only, but cover it) + mobile TOC */
+  .help-toc-mobile summary:hover {
+    border-color: #ECE8E0;
+    background: #fff;
+  }
+  .help-toc-mobile__list a:hover {
+    background: transparent;
+    color: var(--ink);
+  }
+
+  /* Body links */
+  :where(.help-article a, .help-q p a, .shell a:not([class]), .cookie-banner__msg a, .help-search__empty a, .about__faq details a):hover {
+    text-decoration-color: rgba(58, 181, 74, 0.4);
+    color: var(--lookn-green-shadow);
+  }
+
+  /* Footer link hover */
+  .footer__list a:hover { color: var(--ink); }
+}
+
+/* Touch tap optimization: kills the legacy 300ms click delay
+   and tells the browser these elements are tap targets. */
+:where(a, button, summary, [role="button"], .btn--primary, .btn--chip, .btn--social, .btn--store) {
+  touch-action: manipulation;
+}
