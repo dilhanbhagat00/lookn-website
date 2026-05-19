@@ -544,7 +544,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 52px;
+  height: 58px;
   padding: 0;
   border-radius: 14px;
   background: #000;
@@ -566,7 +566,7 @@ body {
   width: auto;
   object-fit: contain;
   display: block;
-  padding: 7px 12px;
+  padding: 8px 14px;
 }
 
 /* ----- Social proof — star + trust signals -------------------- */
@@ -701,8 +701,13 @@ body {
     gap: 12px;
     align-items: center;
   }
-  .hero__cta .btn--store { width: auto; max-width: none; height: 56px; }
-  .hero__cta .btn--store img { width: auto; padding: 8px 14px; }
+  .hero__cta .btn--store {
+    width: auto;
+    max-width: none;
+    height: 64px;
+    border-radius: 16px;
+  }
+  .hero__cta .btn--store img { width: auto; padding: 9px 18px; }
 
   .hero__proof { margin-top: 26px; font-size: 15px; justify-content: flex-start; }
 }
