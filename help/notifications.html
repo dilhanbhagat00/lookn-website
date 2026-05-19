@@ -66,44 +66,43 @@
     <h1 class="help-article__title">Notifications &amp; reminders</h1>
     <p class="help-article__meta">Last updated May 19, 2026</p>
 
-    <p class="help-article__lead">Lookn sends notifications for task reminders, streak nudges, friend activity, and the occasional update. Everything is opt-in by category and you can mute it all in one tap.</p>
+    <p class="help-article__lead">Lookn uses OS-level local notifications for everything time-sensitive. There are four active types, all controllable from <strong>Settings → Notifications</strong>.</p>
+
+    <h2><span class="h2-emo">🔔</span> The four notification types</h2>
+    <ul>
+      <li><strong>TASK_DUE</strong> — fires at the exact time you set on a task. One per task with a time.</li>
+      <li><strong>TASK_FINAL_CALL</strong> — a single aggregated end-of-day ping when you still have incomplete tasks and haven't completed any today. Cancels automatically as soon as you finish any task.</li>
+      <li><strong>ADVENTURE_COMPLETE</strong> — fires when your koko returns from an adventure (the 8-hour wall-clock timer, or sooner if task completions cut it short).</li>
+      <li><strong>STREAK_WARNING</strong> — evening nudge when your streak is at risk because you haven't completed anything today.</li>
+    </ul>
 
     <h2><span class="h2-emo">🔔</span> Turn on notifications</h2>
-    <p>First time you open Lookn, we ask permission via your phone's system prompt. Tap <strong>Allow</strong> to get reminders.</p>
+    <p>First time you open Lookn, the app asks permission via the system prompt. Tap <strong>Allow</strong> to get reminders.</p>
     <p>If you said no the first time and want to turn them on later:</p>
     <ul>
       <li><strong>iOS</strong>: Settings (system) → Notifications → Lookn → toggle <strong>Allow Notifications</strong>.</li>
       <li><strong>Android</strong>: Settings (system) → Apps → Lookn → Notifications → toggle on.</li>
     </ul>
-    <p>Then open Lookn and reload to register your push token.</p>
+    <p>Then open Lookn and the app re-registers automatically.</p>
 
     <h2><span class="h2-emo">🔔</span> Tune which notifications you get</h2>
-    <p>Inside the app: <strong>Settings → Notifications</strong>. Toggle individual categories:</p>
-    <ul>
-      <li><strong>Task reminders</strong> — daily nudges for tasks you haven't completed yet.</li>
-      <li><strong>Streak nudges</strong> — late-day "don't break your streak" pings.</li>
-      <li><strong>Friend activity</strong> — feels received, friend requests, shared task accepts.</li>
-      <li><strong>Quest reminders</strong> — daily quest unlock.</li>
-      <li><strong>Adventure updates</strong> — adventure milestone notifications.</li>
-    </ul>
+    <p>Inside the app: <strong>Settings → Notifications</strong>. You can toggle notifications on/off entirely, and set <strong>morning</strong> and <strong>evening</strong> reminder times that anchor the daily nudges.</p>
 
     <h2><span class="h2-emo">🔕</span> Turn everything off</h2>
     <p>Two ways:</p>
     <ul>
-      <li>Settings → Notifications → toggle each category off.</li>
-      <li>System Settings → Notifications → Lookn → off. Hard mute.</li>
+      <li>In-app: Settings → Notifications → toggle off.</li>
+      <li>System: Settings → Notifications → Lookn → off. Hard mute.</li>
     </ul>
 
-    <h2><span class="h2-emo">🔔</span> Notification times</h2>
-    <p>Task reminders fire at the time of day each task is scheduled for. The "late-day streak nudge" defaults to about 9pm local time. You can change that in Settings → Notifications → Quiet hours / reminder time.</p>
-
     <aside class="help-tip">
-      <strong>Tip:</strong> If you're getting too many friend pings, mute the Friend activity category specifically — it's the loudest one for users with lots of friends.
+      <strong>Tip:</strong> The TASK_FINAL_CALL ping is one of Lookn's most useful — it's the gentle "still here?" before midnight. If you find it annoying you can mute notifications entirely, but it's the safety net that often saves a streak.
     </aside>
 
     <h2><span class="h2-emo">💬</span> FAQ</h2>
-    <details class="help-q"><summary>I'm not getting any notifications.</summary><p>Check three things: (1) system Settings → Notifications → Lookn is allowed, (2) Do Not Disturb / Focus mode isn't blocking them, (3) in-app Settings → Notifications has the category enabled. Re-allow if you ever revoked permission.</p></details>
-    <details class="help-q"><summary>I'm getting reminders for friends who left.</summary><p>Force-close and reopen the app — the Friends list refreshes from the server and clears deleted-friend cards. Reminders stop on the next sync.</p></details>
+    <details class="help-q"><summary>I'm not getting any notifications.</summary><p>Check three things: (1) system Settings → Notifications → Lookn is allowed, (2) Do Not Disturb / Focus mode isn't blocking them, (3) in-app Settings → Notifications is on. Re-allow if you ever revoked permission.</p></details>
+    <details class="help-q"><summary>I get a TASK_FINAL_CALL even after completing a task.</summary><p>Shouldn't happen — completing any task today cancels the daily final-call ping. If it fires anyway, it likely scheduled before your completion finished syncing. Email <a href="mailto:support@looknapp.com">support@looknapp.com</a> with the time and we'll look.</p></details>
+    <details class="help-q"><summary>Why don't I see "friend activity" or "quest" notifications listed?</summary><p>Friend activity and quest events are in-app (the bell icon and feel badges on Friends) rather than OS push. The four types above are the ones that wake your phone.</p></details>
     <details class="help-q"><summary>Can I get a Sunday-off mode?</summary><p>Not as a built-in toggle yet — but Quiet hours can give you a quiet window every day.</p></details>
 
     <footer class="help-article__foot">

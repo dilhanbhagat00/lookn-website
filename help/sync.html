@@ -111,10 +111,10 @@
     <p>Your offline activity is stored locally and syncs to the cloud the next time you connect.</p>
 
     <h2><span class="h2-emo">🤝</span> Conflict resolution</h2>
-    <p>If you completed a task offline on two devices at the same time, Lookn keeps the earliest completion and treats subsequent ones as no-ops. You won't get double rewards but you also won't lose progress.</p>
+    <p>Lookn uses <strong>last-write-wins</strong> per entity. There's no merge logic for concurrent edits across devices. When you next open the app on a device, it hydrates the full cloud state — anything you'd done locally that's older than the cloud value gets overwritten. In practice this rarely matters because the periodic sync runs every 10 minutes while the app is open, and a daily background sync runs every 3 hours when the app is in the background.</p>
 
     <aside class="help-tip">
-      <strong>Tip:</strong> If your data looks off on a device you haven't used in a while, pull-to-refresh on Home. That kicks a full hydrate from the cloud.
+      <strong>Tip:</strong> If your data looks off on a device you haven't used in a while, force-quit and reopen the app. That triggers a full hydrate from the cloud.
     </aside>
 
     <h2><span class="h2-emo">💬</span> FAQ</h2>

@@ -79,25 +79,30 @@
     <p>The app shows a progress screen as it wipes everything. When it's done, you're signed out and dropped on the welcome screen.</p>
 
     <h2><span class="h2-emo">❓</span> What gets deleted</h2>
+    <p>Lookn paginates through every table on your account and removes the rows (500 items per page, 25 concurrent mutations per batch, up to 2 retries per failed item). The full list:</p>
     <ul>
-      <li>Your user profile (name, email, invite code)</li>
-      <li>Your koko (pet state)</li>
-      <li>Your dome (scene state, equipped items, owned inventory)</li>
-      <li>Your tasks, task history, and stats</li>
-      <li>Your streaks and progress events</li>
-      <li>Your journal entries and moods</li>
-      <li>Your adventure and quest progress</li>
-      <li>Your wallet, shop purchases, and daily reward claims</li>
-      <li>Your friend links (both sides — your friends no longer see you)</li>
-      <li>Sent and received feels</li>
-      <li>Shared tasks and shared progress</li>
-      <li>Notifications</li>
-      <li>Push tokens (so the deleted account doesn't keep getting notifications)</li>
-      <li>Your Cognito sign-in account itself</li>
+      <li>User profile (name, email, invite code, theme, locale)</li>
+      <li>Posts (journal entries) and Memories</li>
+      <li>Tasks and Task Stats</li>
+      <li>Pet state (your koko)</li>
+      <li>Scene state (dome, equipped items, owned inventory)</li>
+      <li>Streaks history and Progress Events</li>
+      <li>Adventures and Journeys (with Journey Days)</li>
+      <li>Quests progress</li>
+      <li>Wallet (coins), Shop Purchases, Daily Reward Claims</li>
+      <li>Preferences, Achievements, Notifications</li>
+      <li>Friend Links (both sides — your friends no longer see you)</li>
+      <li>Shared Goals and Shared Progress</li>
+      <li>Friend Boosts (both sent and received)</li>
+      <li>Your Cognito sign-in account itself (via Auth.deleteUser)</li>
+      <li>Push token (cleared during logout so the deleted account stops getting notifications)</li>
     </ul>
 
-    <h2><span class="h2-emo">❓</span> What "30 days" means</h2>
-    <p>The app deletion is immediate — your records are gone from our live database when the progress screen finishes. Some encrypted backups exist for disaster recovery for up to 30 days, after which they expire and your data is unrecoverable.</p>
+    <h2><span class="h2-emo">⏱️</span> How long it takes</h2>
+    <p>The deletion runs synchronously while the progress screen is open. Typical accounts finish in <strong>seconds to about a minute</strong>, depending on how much data you have. When the screen completes you're signed out automatically.</p>
+
+    <h2><span class="h2-emo">📦</span> About the "30 days"</h2>
+    <p>The live database wipe is immediate — your records are gone from DynamoDB the moment the progress screen finishes. Some encrypted infrastructure backups exist for disaster recovery for up to 30 days, after which they roll off too. There's no soft-delete flag and no archival copy on our side.</p>
 
     <aside class="help-tip">
       <strong>Tip:</strong> If you want a copy of your data <em>before</em> deleting, email <a href="mailto:support@looknapp.com">support@looknapp.com</a> first and we'll send a JSON export within 30 days. Once you delete, there's nothing to export.

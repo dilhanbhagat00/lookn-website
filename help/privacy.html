@@ -70,23 +70,24 @@
 
     <h2><span class="h2-emo">❓</span> What we collect</h2>
     <ul>
-      <li><strong>Account basics</strong> — your email, a hashed credential (we never see your password).</li>
-      <li><strong>Your app state</strong> — koko name, tasks, streaks, dome layout, adventure progress, friend list. Encrypted in transit and at rest, stored in AWS US regions.</li>
-      <li><strong>Anonymous usage events</strong> — counts like "completed task," "opened journal." Tied to a random ID, not your name or email.</li>
+      <li><strong>Account basics</strong> — your email and (optionally) your chosen username, avatar, and locale. We use email passwordless auth via AWS Cognito — there's a password slot in the auth layer but you log in with a 6-digit code each time, so it's not something you set or remember.</li>
+      <li><strong>Your app state</strong> — koko name, tasks, streak history, dome scene, wallet (coins), adventure progress, quests, journal post metadata, friend links, shared task progress. Stored in DynamoDB in AWS US regions; encrypted in transit (HTTPS/TLS) and at rest.</li>
+      <li><strong>Anonymous usage events</strong> — session starts, screen views, task/quest/streak/shop/adventure events. Tied to a random analytics ID, not your name or email. Never includes the text body of journals or tasks.</li>
       <li><strong>Anonymous web analytics</strong> — on <em>looknapp.com</em> only (not the app), via Microsoft Clarity, and only after you accept the cookie banner.</li>
     </ul>
 
     <h2><span class="h2-emo">❓</span> What we never collect</h2>
     <ul>
-      <li><strong>The text of your journal entries.</strong> Ever. Not for analytics, not to train AI, not for support.</li>
-      <li><strong>Your contacts, photos, calendar, location, microphone</strong> — unless a feature explicitly asks and you say yes.</li>
-      <li><strong>Advertising IDs.</strong> There are no ads in Lookn.</li>
+      <li><strong>The text of your journal entries (your thoughts).</strong> Ever. Not for analytics, not to train AI, not for support.</li>
+      <li><strong>Task and mood text bodies</strong> — only metadata (task title for your own use, emoji, completion time) goes to analytics, never free-text content.</li>
+      <li><strong>Your contacts, photos, calendar, location, microphone, biometric data</strong> — unless a feature explicitly asks and you say yes.</li>
+      <li><strong>Advertising IDs / ad targeting / behavioral profiles.</strong> There are no ads in Lookn.</li>
     </ul>
 
     <h2><span class="h2-emo">🔒</span> Who can see your data</h2>
     <ul>
       <li><strong>You</strong> — through the app.</li>
-      <li><strong>Our infrastructure providers</strong> (AWS for storage/auth, Apple/Google for app delivery). They process data on our behalf under their own privacy commitments. No one at these companies is reading your journals.</li>
+      <li><strong>Our infrastructure providers</strong> — AWS (Cognito for auth, AppSync for the GraphQL API, DynamoDB for storage, Lambda for backend functions, S3 for assets), Apple/Google for app delivery and IAP receipts, and Microsoft Clarity for web-only analytics. They process data on our behalf under their own privacy commitments. No one at these companies is reading your journals.</li>
       <li><strong>Us</strong> — only as aggregated anonymous numbers, or specific account data if you email support asking us to look at something.</li>
     </ul>
 

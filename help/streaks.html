@@ -66,37 +66,43 @@
     <h1 class="help-article__title">Understanding streaks</h1>
     <p class="help-article__meta">Last updated May 19, 2026</p>
 
-    <p class="help-article__lead">Your streak is how Lookn tracks consistency — gently. It grows on every day you do at least one task, pauses if you miss a full day, and never punishes you for being human.</p>
+    <p class="help-article__lead">Your streak is how Lookn tracks consistency — gently. It grows when you complete a task on a given day, uses a 4 AM rollover so late-night check-ins still count, and gives you multiple ways to recover a missed day before the streak resets.</p>
 
     <h2><span class="h2-emo">🚀</span> How a streak grows</h2>
-    <p>Complete <strong>any one task</strong> in a given day and your streak ticks up by 1. It doesn't matter which task, how long it took, or whether it was a shared task with a friend or a solo one. One check-in is the contract.</p>
-    <p>You can see your current streak on the Home screen as a flame counter next to your koko. Tap it to see your full streak history — total days, longest run, current run, and a heatmap of the last few months.</p>
+    <p>Complete <strong>any one task</strong> on a given day and your streak ticks up by 1 the next day. It doesn't matter which task, how long it took, or whether it was a shared task with a friend or a solo one — one check-in is the contract.</p>
+    <p>You can see your current streak in two places: the <strong>StreakWidget</strong> on the Home screen and the dedicated Streaks screen in the Me tab (shows current streak, best streak, and a calendar with green dots for completed days and hammer icons for repaired days).</p>
 
     <h2><span class="h2-emo">⏰</span> When a day "ends"</h2>
-    <p>Lookn uses a <strong>4am local rollover</strong>. The day flips at 4am the next morning, not at midnight — so a late-night journal entry at 2am still counts toward yesterday's streak. This matches how most people actually live.</p>
-    <p>If you complete a task between 4am and your bedtime, it belongs to "today". After 4am the next morning, that task closes out and a new day begins.</p>
+    <p>Lookn uses a <strong>4 AM local rollover</strong>. The day flips at 4 AM the next morning, not at midnight — so a journal entry at 2 AM still belongs to yesterday's streak. This matches how most people actually live.</p>
 
     <h2><span class="h2-emo">❓</span> What happens if I miss a day?</h2>
-    <p>If a full day passes (4am to 4am) with zero completions, the streak resets to 0 on the next day. Lookn doesn't shame you — your koko just looks a little sleepy and waits.</p>
-    <p>The good news: <strong>every user gets a small monthly allowance of streak repairs</strong>, free or Plus. If you have one available, you can restore the missed day from the streak screen — see <a href="/help/streak-repair.html">Repairing a missed streak</a>.</p>
+    <p>Lookn measures continuity in <strong>hours since your last completed task</strong>, not strict calendar days. Here's the grace window:</p>
+    <ul>
+      <li><strong>Under 24 hours</strong> since your last task — no missed day, no change.</li>
+      <li><strong>24–48 hours</strong> — 1 missed day. A streak repair fills it automatically if you have one.</li>
+      <li><strong>48–72 hours</strong> — 2 missed days. Two streak savers fill them both (auto). Otherwise, no path = reset.</li>
+      <li><strong>Over 72 hours</strong> — the streak resets.</li>
+    </ul>
+    <p>That's roughly a <strong>2.75-day grace window</strong> in the worst case. You're not punished for sleeping in or having a busy morning.</p>
+    <p>See <a href="/help/streak-repair.html">Repairing a missed streak</a> for how repairs work (savers, the one-time free repair, and the coin repair).</p>
 
     <aside class="help-tip">
-      <strong>Tip:</strong> Travel across timezones can briefly look weird on your streak. Lookn realigns to your phone's current timezone — a pull-to-refresh on the Home screen kicks the sync.
+      <strong>Tip:</strong> Travel across timezones can briefly look weird because the streak uses your phone's local time. It realigns once you're settled — no manual fix needed.
     </aside>
 
     <h2><span class="h2-emo">❓</span> What counts as a "task"?</h2>
     <ul>
-      <li>Any task you added yourself (mindful minute, water, journal, etc.)</li>
-      <li>Any <a href="/help/quests.html">quest</a> step that you completed by doing the underlying action</li>
-      <li>A shared task completed with a friend</li>
+      <li>Any task you added in <strong>My Goals</strong> (water, mindful minute, journal, walk, etc.) — completing it on Home counts.</li>
+      <li>A shared task with a friend, completed via the shared progress screen.</li>
+      <li>Tasks linked to actions (a Breathe exercise, an Affirmation, a Journal entry) — the action triggers completion.</li>
     </ul>
-    <p>Things that <strong>don't</strong> count by themselves: opening the app, tapping your koko, looking at your dome. The streak is about doing, not browsing.</p>
+    <p>Things that <strong>don't</strong> count by themselves: opening the app, petting your koko, browsing your dome. The streak is about doing, not browsing.</p>
 
     <h2><span class="h2-emo">💬</span> FAQ</h2>
-    <details class="help-q"><summary>Does my streak save across devices?</summary><p>Yes. As long as you sign in with the same email, your streak comes from the cloud and is the same on iPhone, iPad, and Android.</p></details>
-    <details class="help-q"><summary>I uninstalled the app — did I lose my streak?</summary><p>No. Reinstall, sign in with the same email, and your streak hydrates back from the cloud.</p></details>
-    <details class="help-q"><summary>The number looks wrong.</summary><p>Pull-to-refresh on Home to re-hydrate from the cloud. If it still looks off, email <a href="mailto:support@looknapp.com">support@looknapp.com</a> with your account email and a screenshot.</p></details>
-    <details class="help-q"><summary>Does completing a task multiple times build the streak faster?</summary><p>No — the streak is one tick per day regardless of how many tasks you complete. Doing more is great, but the streak counts <em>days</em>, not actions.</p></details>
+    <details class="help-q"><summary>Does my streak save across devices?</summary><p>Yes. As long as you sign in with the same email, your streak comes from the cloud and hydrates the same on iPhone, iPad, and Android.</p></details>
+    <details class="help-q"><summary>I uninstalled the app — did I lose my streak?</summary><p>No. Reinstall, sign in with the same email, and your streak (plus tasks, dome, coins, everything) hydrates back from the cloud on the HydrationScreen.</p></details>
+    <details class="help-q"><summary>The number looks wrong.</summary><p>Force-quit and reopen the app to re-hydrate from the cloud. If it still looks off, email <a href="mailto:support@looknapp.com">support@looknapp.com</a> with your account email and a screenshot of the Streaks screen.</p></details>
+    <details class="help-q"><summary>Does completing a task multiple times build the streak faster?</summary><p>No — the streak counts <em>days</em>, not actions. One completion a day is enough; more completions don't speed it up.</p></details>
 
     <footer class="help-article__foot">
       <p class="help-article__helpful">💌 Was this helpful? Reply to us at <a href="mailto:support@looknapp.com">support@looknapp.com</a> — we read every email.</p>
