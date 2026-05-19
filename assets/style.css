@@ -194,11 +194,12 @@ body {
   font-family: "Fredoka", sans-serif;
   font-weight: 700;
   font-size: clamp(44px, 11vw, 64px);
-  line-height: 1.04;
-  letter-spacing: -0.025em;
+  line-height: 1.06;
+  letter-spacing: 0;
+  word-spacing: 0.06em;
   color: var(--ink);
   margin: 0 0 16px;
-  -webkit-text-stroke: 9px #fff;
+  -webkit-text-stroke: 7px #fff;
   paint-order: stroke fill;
 }
 .hero__title em {
@@ -357,7 +358,7 @@ body {
   .hero__title {
     font-size: clamp(56px, 6.5vw, 96px);
     margin-bottom: 22px;
-    -webkit-text-stroke: 10px #fff;
+    -webkit-text-stroke: 8px #fff;
   }
   .hero__sub {
     font-size: clamp(17px, 1.6vw, 22px);
@@ -458,22 +459,22 @@ body {
   box-shadow: 0 0 0 0 var(--lookn-green-shadow);
 }
 
-/* --- Store badge wrapper (App Store / Google Play) ----------- */
+/* --- Store badge wrapper (App Store / Google Play) -----------
+   The badge PNGs carry their own visual treatment (rounded
+   corners, internal padding). Any external box-shadow shows
+   through that transparent padding as awkward wings around the
+   visible badge. Lift on hover, press on active — no shadow. */
 .btn--store {
   height: 56px;
   padding: 0;
   border-radius: var(--r-md);
   background: transparent;
-  box-shadow: 0 5px 0 0 #1A1A1A;
-  overflow: hidden;
 }
-.btn--store:hover { box-shadow: 0 7px 0 0 #1A1A1A; }
-.btn--store:active { transform: translateY(5px); box-shadow: 0 0 0 0 #1A1A1A; }
+.btn--store:active { transform: translateY(2px); }
 .btn--store img {
   display: block;
   height: 56px;
   width: auto;
-  border-radius: var(--r-md);
 }
 
 /* ============================================================
