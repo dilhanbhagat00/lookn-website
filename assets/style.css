@@ -82,14 +82,18 @@ body {
   isolation: isolate;
 }
 
-/* ----- Layer 1: full-bleed illustration as a CSS bg ----------- */
+/* ----- Layer 1: full-bleed illustration as a CSS bg -----------
+   Mobile-first: portrait illustration anchored bottom so the
+   kokos stay in the lower viewport and the sky fills the top
+   where the hero copy overlays. Desktop swaps to the landscape
+   variant in the @media (min-width: 769px) block below. */
 .hero__bg {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   background:
-    url("2.png") center bottom / cover no-repeat,
+    url("2-mobile.png") center bottom / cover no-repeat,
     var(--sky-top);
 }
 
@@ -445,7 +449,9 @@ body {
   border-radius: var(--r-md);
 }
 
-/* Chip button (legal links / sub-page footers). */
+/* Chip button — SmartButton 'gray' variant (Lookn RN client):
+   bg #F0F0F0 + solid darker shadow #D7D7D7 + text #666. Flat,
+   no blur, just bg + shadow stub like the in-app buttons. */
 .btn--chip {
   display: inline-flex;
   align-items: center;
@@ -454,12 +460,12 @@ body {
   padding: 0 18px;
   border: 0;
   border-radius: var(--r-pill-sm);
-  background: #fff;
-  color: var(--ink);
+  background: #F0F0F0;
+  color: #666;
   font-family: "Fredoka", sans-serif;
   font-weight: 600;
   font-size: 14px;
-  box-shadow: 0 5px 0 0 rgba(31, 61, 42, 0.18);
+  box-shadow: 0 5px 0 0 #D7D7D7;
   transform: translateY(0);
   transition:
     transform var(--btn-spring),
@@ -471,12 +477,12 @@ body {
 }
 .btn--chip:hover {
   transform: translateY(-2px);
-  box-shadow: 0 7px 0 0 rgba(31, 61, 42, 0.22);
+  box-shadow: 0 7px 0 0 #D7D7D7;
   color: var(--lookn-green-shadow);
 }
 .btn--chip:active {
   transform: translateY(5px);
-  box-shadow: 0 0 0 0 rgba(31, 61, 42, 0.18);
+  box-shadow: 0 0 0 0 #D7D7D7;
   transition-duration: var(--btn-press);
 }
 .btn--chip:focus-visible { outline: 3px solid var(--lookn-green); outline-offset: 3px; }
@@ -779,8 +785,10 @@ body {
   font-weight: 500;
 }
 
-/* SmartButton recipe — circular social chip. White surface, flat
-   colored shadow underneath, presses down on tap. */
+/* SmartButton recipe — circular social chip. Matches the in-app
+   `gray` variant: bg #F0F0F0, solid #D7D7D7 shadow stub, #666
+   icon color. On hover the icon shifts to the brand green so it
+   feels alive without breaking the SmartButton flat shadow rule. */
 .footer__social {
   list-style: none;
   margin: 0;
@@ -796,24 +804,26 @@ body {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #fff;
-  color: var(--ink);
-  box-shadow: 0 4px 0 0 rgba(31, 61, 42, 0.16);
+  background: #F0F0F0;
+  color: #666;
+  box-shadow: 0 4px 0 0 #D7D7D7;
   transform: translateY(0);
   transition:
     transform var(--btn-spring),
     box-shadow var(--btn-spring),
+    background-color 120ms ease,
     color 120ms ease;
   -webkit-tap-highlight-color: transparent;
 }
 .btn--social:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 0 0 rgba(31, 61, 42, 0.20);
-  color: var(--lookn-green-shadow);
+  box-shadow: 0 6px 0 0 var(--lookn-green-shadow);
+  background: var(--lookn-green);
+  color: #fff;
 }
 .btn--social:active {
   transform: translateY(4px);
-  box-shadow: 0 0 0 0 rgba(31, 61, 42, 0.16);
+  box-shadow: 0 0 0 0 var(--lookn-green-shadow);
   transition-duration: var(--btn-press);
 }
 .btn--social:focus-visible {
