@@ -414,14 +414,14 @@ body {
   margin-bottom: clamp(20px, 6vh, 48px);
 }
 .hero__logo {
-  width: 64px;
-  height: 64px;
+  width: clamp(80px, 18vw, 96px);
+  height: clamp(80px, 18vw, 96px);
   object-fit: contain;
-  filter: drop-shadow(0 4px 10px rgba(31, 61, 42, 0.18));
+  filter: drop-shadow(0 4px 14px rgba(31, 61, 42, 0.22));
 }
 .hero__brand {
   font-weight: 700;
-  font-size: 24px;
+  font-size: clamp(26px, 6vw, 30px);
   letter-spacing: -0.01em;
   color: var(--ink);
   /* Subtle white outline for readability against the illustration. */
@@ -470,14 +470,16 @@ body {
 .hero__title {
   font-family: "Fredoka", sans-serif;
   font-weight: 700;
-  font-size: clamp(44px, 11vw, 64px);
-  line-height: 1.06;
-  letter-spacing: 0;
-  word-spacing: 0.06em;
+  font-size: clamp(48px, 13vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
   color: var(--ink);
-  margin: 0 0 16px;
+  margin: 0 0 18px;
   -webkit-text-stroke: 7px #fff;
   paint-order: stroke fill;
+}
+.hero__title-line {
+  display: block;
 }
 .hero__title em {
   font-style: normal;
@@ -494,23 +496,60 @@ body {
   max-width: 440px;
 }
 
-/* ----- CTAs --------------------------------------------------- */
+/* ----- CTAs ---------------------------------------------------
+   Apple and Google require we use their official badge PNGs. The
+   wrapper around the badge gives us full control of the tap target,
+   corner radius, hover lift, and focus ring — without modifying
+   the badge artwork itself. */
 .hero__cta {
   display: flex;
-  flex-direction: column;
-  gap: 14px;
+  flex-direction: row;
+  gap: 12px;
   align-items: center;
+  justify-content: center;
   width: 100%;
+  flex-wrap: wrap;
 }
 .hero__cta .btn--store {
-  width: 100%;
-  max-width: 280px;
+  flex: 0 1 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  padding: 0;
+  border-radius: 18px;
+  background: #000;
+  overflow: hidden;
+  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 6px 16px rgba(31, 61, 42, 0.22);
+}
+.hero__cta .btn--store:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(31, 61, 42, 0.28);
+}
+.hero__cta .btn--store:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 10px rgba(31, 61, 42, 0.22);
 }
 .hero__cta .btn--store img {
-  width: 100%;
-  height: auto;
-  max-height: 60px;
+  height: 100%;
+  width: auto;
   object-fit: contain;
+  display: block;
+  padding: 10px 18px;
+}
+/* Stack on small phones for full-width tap targets. */
+@media (max-width: 420px) {
+  .hero__cta {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .hero__cta .btn--store {
+    width: 100%;
+    max-width: 280px;
+    height: 64px;
+  }
 }
 
 /* ----- Social proof — star + trust signals -------------------- */
@@ -1181,7 +1220,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 16px 8px 12px;
+  padding: 10px 18px 10px 14px;
   border-radius: 999px;
   background: #fff;
   border: 1.5px solid #ECE8E0;
@@ -1191,12 +1230,22 @@ body {
   color: var(--ink);
   text-decoration: none;
   flex: 0 0 auto;
-  transition: border-color 160ms ease, background-color 160ms ease, color 120ms ease;
+  min-height: 44px;
+  transition: border-color 160ms ease, background-color 160ms ease, color 120ms ease, transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.help-bar__back svg {
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .help-bar__back:hover {
   background: #F4FBF3;
   border-color: var(--lookn-green);
   color: var(--lookn-green-shadow);
+}
+.help-bar__back:hover svg {
+  transform: translateX(-3px);
+}
+.help-bar__back:active {
+  transform: translateY(1px);
 }
 .help-bar__search {
   position: relative;
@@ -1680,53 +1729,62 @@ html { scroll-behavior: smooth; }
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(20px, 3vw, 32px);
+  gap: clamp(28px, 4vw, 40px);
   align-items: start;
+  text-align: center;
 }
 
 .footer__brand {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  align-items: center;
+  gap: 10px;
   max-width: 420px;
+  margin: 0 auto;
 }
 .footer__brand-row {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 .footer__brand-mark {
-  width: 36px;
-  height: 36px;
-  border-radius: 11px;
-  box-shadow: 0 1px 0 rgba(31, 61, 42, 0.05), 0 4px 12px rgba(31, 61, 42, 0.10);
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
 }
 .footer__brand-name {
   font-family: "Fredoka", sans-serif;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 22px;
   letter-spacing: -0.01em;
   color: var(--ink);
 }
 .footer__tagline {
   margin: 0;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 14.5px;
   color: var(--ink-muted);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .footer__cols {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(16px, 3vw, 32px);
+  gap: clamp(28px, 4vw, 32px);
+  text-align: left;
+}
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 .footer__col-title {
-  margin: 0 0 8px;
+  margin: 0 0 12px;
   font-family: "Fredoka", sans-serif;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 12px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-soft);
 }
@@ -1737,30 +1795,43 @@ html { scroll-behavior: smooth; }
   display: flex;
   flex-direction: column;
   gap: 4px;
+  width: 100%;
+  align-items: center;
 }
 .footer__list a {
+  display: inline-block;
   color: var(--ink);
   font-weight: 500;
-  font-size: 14px;
-  transition: color 120ms ease;
+  font-size: 15px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  transition: background-color 160ms ease, color 120ms ease;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  max-width: 100%;
 }
-.footer__list a:hover { color: var(--lookn-green-shadow); }
+.footer__list a:hover {
+  color: var(--lookn-green-shadow);
+  background: #F4FBF3;
+}
 
 .footer__bottom {
   max-width: 1180px;
-  margin: clamp(18px, 2.5vw, 24px) auto 0;
-  padding-top: clamp(12px, 2vw, 18px);
+  margin: clamp(24px, 3vw, 32px) auto 0;
+  padding-top: clamp(20px, 3vw, 24px);
   border-top: 1px solid var(--hairline);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
 }
 .footer__copyright {
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--ink-soft);
   font-weight: 500;
+  text-align: center;
+  letter-spacing: 0.01em;
 }
 
 .footer__social {
@@ -1769,16 +1840,17 @@ html { scroll-behavior: smooth; }
   padding: 0;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 .btn--social {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   color: #1A1A1A;
   background: #fff;
   box-shadow: 0 4px 0 0 #E8E8E8;
 }
+.btn--social svg { width: 20px; height: 20px; }
 .btn--social:hover {
   background: var(--lookn-green);
   color: #fff;
@@ -1790,12 +1862,29 @@ html { scroll-behavior: smooth; }
 }
 .btn--social svg { display: block; }
 
-/* Desktop layout: brand left, link columns right. Single row. */
+/* Desktop layout: brand left, link columns right. Left-aligned. */
 @media (min-width: 769px) {
   .footer__inner {
     grid-template-columns: 1.2fr 2fr;
     gap: clamp(40px, 6vw, 80px);
     align-items: start;
+    text-align: left;
+  }
+  .footer__brand {
+    align-items: flex-start;
+    margin: 0;
+  }
+  .footer__col {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .footer__list { align-items: flex-start; }
+  .footer__list a { padding: 4px 0; border-radius: 0; }
+  .footer__list a:hover { background: transparent; }
+  .footer__bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
   }
 }
 
