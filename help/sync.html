@@ -91,9 +91,8 @@
 
     <h2><span class="h2-emo">❓</span> What doesn't sync</h2>
     <ul>
-      <li>System-level notification settings (per-device)</li>
-      <li>Push tokens (per-device)</li>
-      <li>App appearance preferences set per-device (theme, etc.)</li>
+      <li>Your phone's notification permission and Do Not Disturb settings (those live on each device)</li>
+      <li>App appearance preferences set on a particular device (like the theme)</li>
     </ul>
 
     <h2><span class="h2-emo">☁️</span> Offline mode</h2>
@@ -110,11 +109,11 @@
     </ul>
     <p>Your offline activity is stored locally and syncs to the cloud the next time you connect.</p>
 
-    <h2><span class="h2-emo">🤝</span> Conflict resolution</h2>
-    <p>Lookn uses <strong>last-write-wins</strong> per entity. There's no merge logic for concurrent edits across devices. When you next open the app on a device, it hydrates the full cloud state — anything you'd done locally that's older than the cloud value gets overwritten. In practice this rarely matters because the periodic sync runs every 10 minutes while the app is open, and a daily background sync runs every 3 hours when the app is in the background.</p>
+    <h2><span class="h2-emo">🤝</span> If two devices edit the same thing</h2>
+    <p>The most recent change wins. So if you check off a task on your phone and also on your iPad, only the latest one sticks (you won't get double coins, but you also won't lose progress). Lookn quietly syncs every few minutes while the app is open, and again in the background a few times a day — so devices stay close to in step.</p>
 
     <aside class="help-tip">
-      <strong>Tip:</strong> If your data looks off on a device you haven't used in a while, force-quit and reopen the app. That triggers a full hydrate from the cloud.
+      <strong>Tip:</strong> If a device you haven't opened in a while looks out of date, force-quit and reopen the app. That pulls the freshest version of everything from your account.
     </aside>
 
     <h2><span class="h2-emo">💬</span> FAQ</h2>

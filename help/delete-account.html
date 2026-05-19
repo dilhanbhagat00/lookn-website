@@ -66,7 +66,7 @@
     <h1 class="help-article__title">Deleting your account</h1>
     <p class="help-article__meta">Last updated May 19, 2026</p>
 
-    <p class="help-article__lead">Account deletion in Lookn is permanent and complete. Your data is removed from our servers, your Cognito user is deleted, your local app data is wiped. We don't keep a "soft delete" record.</p>
+    <p class="help-article__lead">Deleting your account is permanent and final. Your data leaves our servers, your sign-in is closed out, and the app data on your phone is wiped. There's no soft-delete and no archive — once it's gone, it's gone.</p>
 
     <h2><span class="h2-emo">🛠️</span> How to delete your account</h2>
     <ol>
@@ -79,30 +79,27 @@
     <p>The app shows a progress screen as it wipes everything. When it's done, you're signed out and dropped on the welcome screen.</p>
 
     <h2><span class="h2-emo">❓</span> What gets deleted</h2>
-    <p>Lookn paginates through every table on your account and removes the rows (500 items per page, 25 concurrent mutations per batch, up to 2 retries per failed item). The full list:</p>
+    <p>Everything tied to your account. Specifically:</p>
     <ul>
-      <li>User profile (name, email, invite code, theme, locale)</li>
-      <li>Posts (journal entries) and Memories</li>
-      <li>Tasks and Task Stats</li>
-      <li>Pet state (your koko)</li>
-      <li>Scene state (dome, equipped items, owned inventory)</li>
-      <li>Streaks history and Progress Events</li>
-      <li>Adventures and Journeys (with Journey Days)</li>
-      <li>Quests progress</li>
-      <li>Wallet (coins), Shop Purchases, Daily Reward Claims</li>
-      <li>Preferences, Achievements, Notifications</li>
-      <li>Friend Links (both sides — your friends no longer see you)</li>
-      <li>Shared Goals and Shared Progress</li>
-      <li>Friend Boosts (both sent and received)</li>
-      <li>Your Cognito sign-in account itself (via Auth.deleteUser)</li>
-      <li>Push token (cleared during logout so the deleted account stops getting notifications)</li>
+      <li>Your profile (name, email, your koko's name)</li>
+      <li>Every journal entry and memory you've saved</li>
+      <li>Every task, your completion history, and your stats</li>
+      <li>Your dome — equipped pieces and your full furniture collection</li>
+      <li>Your streak history (current, best, and every completed day)</li>
+      <li>Your adventures, quests, and progress milestones</li>
+      <li>Your coins, shop purchase history, and any unclaimed daily rewards</li>
+      <li>Your preferences, achievements, and notification settings</li>
+      <li>Your friend connections — your friends no longer see you in their list</li>
+      <li>Every shared task, every feel you sent or received</li>
+      <li>Your sign-in account itself, so logging in with that email is no longer possible</li>
+      <li>Your phone's notification token, so the deleted account stops getting any pings</li>
     </ul>
 
     <h2><span class="h2-emo">⏱️</span> How long it takes</h2>
-    <p>The deletion runs synchronously while the progress screen is open. Typical accounts finish in <strong>seconds to about a minute</strong>, depending on how much data you have. When the screen completes you're signed out automatically.</p>
+    <p>The progress screen does the work right then and there. Most accounts finish in <strong>seconds to about a minute</strong>, depending on how much data you've built up. When the screen completes, you're signed out and back at the welcome screen.</p>
 
     <h2><span class="h2-emo">📦</span> About the "30 days"</h2>
-    <p>The live database wipe is immediate — your records are gone from DynamoDB the moment the progress screen finishes. Some encrypted infrastructure backups exist for disaster recovery for up to 30 days, after which they roll off too. There's no soft-delete flag and no archival copy on our side.</p>
+    <p>Your live data is gone the moment the progress screen finishes — there's no soft-delete or archive copy of your account. We do keep encrypted system-level backups for up to 30 days as part of standard infrastructure practice (disaster recovery), after which those roll off too. No one is reading those — they exist only to recover from failures, not to look at user data.</p>
 
     <aside class="help-tip">
       <strong>Tip:</strong> If you want a copy of your data <em>before</em> deleting, email <a href="mailto:support@looknapp.com">support@looknapp.com</a> first and we'll send a JSON export within 30 days. Once you delete, there's nothing to export.
