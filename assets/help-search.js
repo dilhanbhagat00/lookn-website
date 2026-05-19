@@ -32,7 +32,7 @@ window.LOOKN_HELP_ARTICLES = [
         var li = document.createElement("li");
         li.innerHTML =
           '<a href="/help/' + a.slug + '.html">' +
-            '<span class="help-search__cat">' + a.emoji + ' ' + a.cat + '</span>' +
+            '<span class="help-search__cat"><span class="rel-emo">' + a.emoji + '</span>' + a.cat + '</span>' +
             '<span class="help-search__title">' + a.title + '</span>' +
             '<span class="help-search__snippet">' + a.snippet + '</span>' +
           '</a>';

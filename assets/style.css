@@ -116,7 +116,11 @@ body::-webkit-scrollbar-thumb:hover {
 .cookie-banner__msg a {
   color: var(--lookn-green-shadow);
   font-weight: 500;
-  border-bottom: 1px solid currentColor;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(58, 181, 74, 0.4);
+  transition: text-decoration-color 120ms ease, color 120ms ease;
 }
 .cookie-banner__actions {
   display: flex;
@@ -604,7 +608,11 @@ body {
 .shell a:not([class]) {
   color: var(--lookn-green-shadow);
   font-weight: 500;
-  border-bottom: 1px solid currentColor;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(58, 181, 74, 0.4);
+  transition: text-decoration-color 120ms ease, color 120ms ease;
 }
 
 .card {
@@ -812,7 +820,11 @@ body {
 .help-q p a {
   color: var(--lookn-green-shadow);
   font-weight: 500;
-  border-bottom: 1px solid currentColor;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(58, 181, 74, 0.4);
+  transition: text-decoration-color 120ms ease, color 120ms ease;
 }
 .help-q em { font-style: italic; }
 
@@ -871,7 +883,11 @@ body {
 .help-search__empty a {
   color: var(--lookn-green-shadow);
   font-weight: 500;
-  border-bottom: 1px solid currentColor;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(58, 181, 74, 0.4);
+  transition: text-decoration-color 120ms ease, color 120ms ease;
 }
 
 /* Category card grid on help.html landing */
@@ -886,10 +902,12 @@ body {
   background: #fff;
   border-radius: var(--r-lg);
   padding: 22px 22px 14px;
-  transition: background-color 160ms ease;
+  border: 1px solid #ECE8E0;
+  transition: background-color 160ms ease, border-color 160ms ease;
 }
 .help-catcard:hover {
   background: #F8FCF7;
+  border-color: #D8EBD2;
 }
 .help-catcard__head {
   display: flex;
@@ -932,8 +950,8 @@ body {
   content: "›";
   font-size: 18px;
   color: var(--ink-soft);
-  opacity: 0;
-  transform: translateX(-4px);
+  opacity: 0.4;
+  transform: translateX(0);
   transition: opacity 160ms ease, transform 160ms ease, color 120ms ease;
 }
 .help-catcard__list a:hover {
@@ -942,7 +960,7 @@ body {
 }
 .help-catcard__list a:hover::after {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(2px);
   color: var(--lookn-green-shadow);
 }
 @media (min-width: 640px) { .help-catgrid { grid-template-columns: repeat(2, 1fr); } }
@@ -966,15 +984,19 @@ body {
 .help-bar__back {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  padding: 8px 14px 8px 10px;
+  margin-left: -10px;
+  border-radius: 999px;
   font-family: "Fredoka", sans-serif;
   font-weight: 600;
   font-size: 14px;
   color: var(--ink);
   text-decoration: none;
   flex: 0 0 auto;
+  transition: background-color 120ms ease, color 120ms ease;
 }
-.help-bar__back:hover { color: var(--lookn-green-shadow); }
+.help-bar__back:hover { background: rgba(102,206,99,0.12); color: var(--lookn-green-shadow); }
 .help-bar__search {
   position: relative;
   flex: 0 1 360px;
@@ -1087,7 +1109,12 @@ body {
   border-radius: 8px;
   transition: background-color 120ms ease, color 120ms ease;
 }
-.help-toc-mobile__list a:hover { background: #F4FBF3; color: var(--lookn-green-shadow); }
+.help-toc-mobile__list a:hover { background: #F4FBF3; color: var(--ink); }
+.help-toc-mobile__list a.is-active {
+  background: #E8F6E5;
+  color: #2E8E3C;
+  font-weight: 700;
+}
 .help-toc-mobile__group {
   font-family: "Fredoka", sans-serif;
   font-weight: 700;
@@ -1148,11 +1175,11 @@ body {
     line-height: 1.4;
     transition: color 120ms ease, background-color 120ms ease;
   }
-  .help-rail__list a:hover { color: var(--lookn-green-shadow); background: #F8FCF7; }
+  .help-rail__list a:hover { color: var(--ink); background: #F4FBF3; }
   .help-rail__list a.is-active {
-    color: var(--lookn-green-shadow);
-    background: #F4FBF3;
-    font-weight: 600;
+    color: #2E8E3C;
+    background: #E8F6E5;
+    font-weight: 700;
   }
 }
 .help-crumbs {
@@ -1203,6 +1230,18 @@ body {
   scroll-margin-top: 80px;
 }
 html { scroll-behavior: smooth; }
+
+/* Emoji-text spacing: emoji glyphs have tight side bearings that read
+   crammed against the text. Wrap the leading emoji in a span and give
+   it explicit margin-right so the heading "🚀 How" reads as "🚀  How". */
+.h2-emo,
+.rel-emo,
+.toc-emo {
+  display: inline-block;
+  margin-right: 8px;
+  flex: 0 0 auto;
+}
+.toc-emo { margin-right: 6px; }
 .help-article p, .help-article li {
   font-size: 15.5px;
   line-height: 1.7;
@@ -1216,7 +1255,15 @@ html { scroll-behavior: smooth; }
 .help-article a {
   color: var(--lookn-green-shadow);
   font-weight: 500;
-  border-bottom: 1px solid currentColor;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(58, 181, 74, 0.4);
+  transition: text-decoration-color 120ms ease, color 120ms ease;
+}
+:where(.help-article a, .help-q p a, .shell a:not([class]), .cookie-banner__msg a, .help-search__empty a, .about__faq details a):hover {
+  text-decoration-color: currentColor;
+  color: #2E8E3C;
 }
 .help-article strong { font-weight: 600; }
 .help-article em { font-style: italic; }
@@ -1267,9 +1314,11 @@ html { scroll-behavior: smooth; }
   top: 50%;
   transform: translateY(-50%);
   font-size: 22px;
-  color: var(--ink-soft);
-  transition: transform 200ms ease;
+  font-weight: 500;
+  color: var(--ink-muted);
+  transition: transform 200ms ease, color 120ms ease;
 }
+.help-article .help-q:hover summary::after { color: var(--ink); }
 .help-article .help-q[open] summary::after { transform: translateY(-50%) rotate(45deg); color: var(--lookn-green-shadow); }
 .help-article .help-q p {
   margin: 12px 0 0;
@@ -1402,7 +1451,11 @@ html { scroll-behavior: smooth; }
 .about__faq details a {
   color: var(--lookn-green-shadow);
   font-weight: 500;
-  border-bottom: 1px solid currentColor;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(58, 181, 74, 0.4);
+  transition: text-decoration-color 120ms ease, color 120ms ease;
 }
 
 /* ============================================================

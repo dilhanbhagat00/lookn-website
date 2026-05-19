@@ -23,6 +23,21 @@
       return { id: h.id, text: (h.textContent || "").trim() };
     });
 
+  var EMOJI_LEADING = /^([^\w\s][^\w\s]*?)\s+(.+)$/;
+
+  function setLinkContent(a, text) {
+    var m = text.match(EMOJI_LEADING);
+    if (m) {
+      var emo = document.createElement("span");
+      emo.className = "toc-emo";
+      emo.textContent = m[1];
+      a.appendChild(emo);
+      a.appendChild(document.createTextNode(m[2]));
+    } else {
+      a.textContent = text;
+    }
+  }
+
   function renderToc(target) {
     if (!target) return;
     target.innerHTML = "";
@@ -30,8 +45,8 @@
       var li = document.createElement("li");
       var a = document.createElement("a");
       a.href = "#" + s.id;
-      a.textContent = s.text;
       a.dataset.tocLink = s.id;
+      setLinkContent(a, s.text);
       li.appendChild(a);
       target.appendChild(li);
     });
