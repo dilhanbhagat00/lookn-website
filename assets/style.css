@@ -46,6 +46,22 @@ button { font: inherit; cursor: pointer; }
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(31, 61, 42, 0.18) transparent;
+  scrollbar-gutter: stable;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar { width: 8px; height: 8px; }
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track { background: transparent; }
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: rgba(31, 61, 42, 0.18);
+  border-radius: 999px;
+}
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background: rgba(31, 61, 42, 0.32);
 }
 
 body {
@@ -105,8 +121,8 @@ body {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;      /* left-align everything */
-  text-align: left;
+  align-items: center;
+  text-align: center;
   padding-top: max(env(safe-area-inset-top, 0px), 24px);
   padding-right: clamp(16px, 5vw, 32px);
   padding-bottom: max(env(safe-area-inset-bottom, 0px), 60px);
@@ -169,7 +185,7 @@ body {
   max-width: 580px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 
 /* Headline. Dark green-ink with a subtle white outline so it reads
@@ -177,14 +193,13 @@ body {
 .hero__title {
   font-family: "Fredoka", sans-serif;
   font-weight: 700;
-  font-size: clamp(34px, 8.5vw, 56px);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  font-size: clamp(44px, 11vw, 64px);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
   color: var(--ink);
-  margin: 0 0 14px;
-  -webkit-text-stroke: 8px #fff;
+  margin: 0 0 16px;
+  -webkit-text-stroke: 9px #fff;
   paint-order: stroke fill;
-  text-align: left;
 }
 .hero__title em {
   font-style: normal;
@@ -194,14 +209,13 @@ body {
 /* Sub-headline. Thinner white outline. */
 .hero__sub {
   margin: 0 0 30px;
-  font-weight: 500;
-  font-size: clamp(15px, 4vw, 18px);
+  font-weight: 600;
+  font-size: clamp(16px, 4.4vw, 19px);
   line-height: 1.45;
   color: var(--ink);
   max-width: 440px;
-  -webkit-text-stroke: 3px #fff;
+  -webkit-text-stroke: 4px #fff;
   paint-order: stroke fill;
-  text-align: left;
 }
 
 /* ----- CTAs --------------------------------------------------- */
@@ -209,7 +223,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
 }
 .hero__cta .btn--store {
@@ -219,7 +233,7 @@ body {
 .hero__cta .btn--store img {
   width: 100%;
   height: auto;
-  max-height: 60px;
+  max-height: 56px;
   object-fit: contain;
 }
 
@@ -227,15 +241,15 @@ body {
 .hero__proof {
   display: inline-flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
   margin: 22px 0 0;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 14px;
   letter-spacing: 0.005em;
   color: var(--ink);
-  -webkit-text-stroke: 3px #fff;
+  -webkit-text-stroke: 4px #fff;
   paint-order: stroke fill;
 }
 .hero__proof-star { -webkit-text-stroke: 0; }
@@ -410,41 +424,37 @@ body {
 .btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 .btn--full { width: 100%; }
 
-/* App Store / Play Store badges. SOFT shadow only (Finch-style) —
-   they sit clean on the sky, not stamped onto the illustration. */
 .btn--store {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 60px;
+  height: 56px;
   padding: 0;
   border: 0;
   border-radius: var(--r-md);
   background: transparent;
-  box-shadow: 0 4px 14px rgba(31, 61, 42, 0.12);
+  box-shadow: 0 5px 0 0 #1A1A1A;
   transform: translateY(0);
   transition:
     transform var(--btn-spring),
-    box-shadow var(--btn-spring),
-    filter 100ms ease-out;
+    box-shadow var(--btn-spring);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   overflow: hidden;
 }
 .btn--store:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(31, 61, 42, 0.16);
-  filter: brightness(1.04);
+  box-shadow: 0 7px 0 0 #1A1A1A;
 }
 .btn--store:active {
-  transform: translateY(1px);
-  box-shadow: 0 2px 8px rgba(31, 61, 42, 0.12);
+  transform: translateY(5px);
+  box-shadow: 0 0 0 0 #1A1A1A;
   transition-duration: var(--btn-press);
 }
 .btn--store:focus-visible { outline: 3px solid var(--lookn-green); outline-offset: 3px; }
 .btn--store img {
   display: block;
-  height: 60px;
+  height: 56px;
   width: auto;
   border-radius: var(--r-md);
 }
@@ -568,70 +578,11 @@ body {
 }
 .fourohfour img { width: 96px; height: 96px; border-radius: 22px; margin-bottom: 18px; }
 
-/* ============================================================
-   ABOUT — crawler-rich content between hero and footer. Cream
-   surface, generous reading width, two-column features on
-   desktop, single column on mobile.
-   ============================================================ */
-
-.about {
-  background: var(--page-bg);
-  color: var(--ink);
-  padding: clamp(40px, 7vw, 80px) clamp(20px, 5vw, 32px);
-}
-.about__inner {
-  max-width: 920px;
-  margin: 0 auto;
-}
-.about__lead h2 {
-  font-family: "Fredoka", sans-serif;
-  font-weight: 700;
-  font-size: clamp(26px, 4vw, 38px);
-  letter-spacing: -0.015em;
-  color: var(--ink);
-  margin: 0 0 14px;
-  line-height: 1.15;
-}
-.about__lead p {
-  font-size: clamp(15px, 1.6vw, 17px);
-  color: var(--ink-muted);
-  line-height: 1.65;
-  margin: 0 0 32px;
-  max-width: 720px;
-}
-.about__h3 {
-  font-family: "Fredoka", sans-serif;
-  font-weight: 600;
-  font-size: clamp(18px, 2.2vw, 22px);
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  margin: 28px 0 14px;
-}
-.about__features {
-  list-style: none;
-  margin: 0 0 8px;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-}
-.about__features li {
-  background: #fff;
-  border-radius: var(--r-md);
-  padding: 14px 18px;
-  font-size: 15px;
-  line-height: 1.55;
-  color: var(--ink);
-  box-shadow: 0 1px 0 rgba(31, 61, 42, 0.04), 0 6px 16px rgba(31, 61, 42, 0.05);
-}
-.about__features strong {
-  font-weight: 600;
-  color: var(--ink);
-}
 .about__faq {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin: 14px 0 24px;
 }
 .about__faq details {
   background: #fff;
@@ -674,12 +625,6 @@ body {
   color: var(--lookn-green-shadow);
   font-weight: 500;
   border-bottom: 1px solid currentColor;
-}
-@media (min-width: 769px) {
-  .about__features {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
-  }
 }
 
 /* ============================================================
