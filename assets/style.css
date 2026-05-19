@@ -413,7 +413,13 @@ body {
     var(--sky-top);
 }
 
-/* ----- Layer 2: content shell --------------------------------- */
+/* ----- Layer 2: content shell ---------------------------------
+   Mobile-first vertical rhythm:
+   - Brand row sits ~52px from the safe-area top so it doesn't touch
+     the status bar.
+   - Hero copy starts ~30px below the brand row, with comfortable
+     breathing space before the kokos illustration peeks in at
+     the bottom. */
 .hero__shell {
   position: relative;
   z-index: 2;
@@ -423,7 +429,7 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding-top: max(env(safe-area-inset-top, 0px), 24px);
+  padding-top: max(env(safe-area-inset-top, 0px), 52px);
   padding-right: clamp(16px, 5vw, 32px);
   padding-bottom: max(env(safe-area-inset-bottom, 0px), 60px);
   padding-left: max(env(safe-area-inset-left, 0px), 16px);
@@ -433,18 +439,18 @@ body {
 .hero__top {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: clamp(20px, 6vh, 48px);
+  gap: 10px;
+  margin-bottom: clamp(28px, 6vh, 56px);
 }
 .hero__logo {
-  width: clamp(56px, 13vw, 72px);
-  height: clamp(56px, 13vw, 72px);
+  width: clamp(72px, 17vw, 96px);
+  height: clamp(72px, 17vw, 96px);
   object-fit: contain;
-  filter: drop-shadow(0 4px 12px rgba(31, 61, 42, 0.22));
+  filter: drop-shadow(0 5px 14px rgba(31, 61, 42, 0.24));
 }
 .hero__brand {
   font-weight: 700;
-  font-size: clamp(32px, 8vw, 40px);
+  font-size: clamp(36px, 9vw, 44px);
   letter-spacing: -0.015em;
   color: var(--ink);
   /* Subtle white outline for readability against the illustration. */
@@ -669,8 +675,8 @@ body {
     padding-left: clamp(20px, 4vw, 56px);
   }
   .hero__top { margin-bottom: clamp(28px, 6vh, 56px); }
-  .hero__logo { width: clamp(60px, 5vw, 80px); height: clamp(60px, 5vw, 80px); }
-  .hero__brand { font-size: clamp(34px, 2.8vw, 44px); }
+  .hero__logo { width: clamp(72px, 6vw, 104px); height: clamp(72px, 6vw, 104px); }
+  .hero__brand { font-size: clamp(36px, 3.2vw, 48px); }
 
   .hero__copy {
     align-items: flex-start;
