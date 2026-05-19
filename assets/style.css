@@ -379,123 +379,102 @@ body {
 }
 
 /* ============================================================
-   Buttons — SmartButton recipe (Lookn RN client). DRY.
+   Buttons — single SmartButton recipe, variants by class.
+
+   Shared base via :where() so every .btn--* gets the same press
+   physics (transform/transition/focus) without duplicate rules.
+   Each variant only declares its bg / shadow / text + size.
    ============================================================ */
 
-.btn {
-  position: relative;
+:where(.btn--primary, .btn--chip, .btn--social, .btn--store) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
+  border: 0;
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transform: translateY(0);
+  transition:
+    transform var(--btn-spring),
+    box-shadow var(--btn-spring),
+    background-color 120ms ease,
+    color 120ms ease;
+  will-change: transform, box-shadow;
+}
+
+:where(.btn--primary, .btn--chip, .btn--social, .btn--store):hover {
+  transform: translateY(-2px);
+}
+:where(.btn--primary, .btn--chip, .btn--social, .btn--store):active {
+  transition-duration: var(--btn-press);
+}
+:where(.btn--primary, .btn--chip, .btn--social, .btn--store):focus-visible {
+  outline: 3px solid var(--lookn-green);
+  outline-offset: 3px;
+}
+
+/* --- Primary (green CTA) ------------------------------------- */
+.btn--primary {
   height: 56px;
   padding: 0 28px;
-  border: 0;
   border-radius: var(--r-pill);
-  font-family: "Fredoka", sans-serif;
   font-weight: 700;
   font-size: 18px;
   letter-spacing: -0.005em;
   color: #fff;
   background: var(--lookn-green);
   box-shadow: 0 8px 0 0 var(--lookn-green-shadow);
-  transform: translateY(0);
-  transition:
-    transform var(--btn-spring),
-    background-color 100ms ease-out,
-    box-shadow var(--btn-spring),
-    filter 100ms ease-out;
-  will-change: transform, box-shadow;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  cursor: pointer;
-  text-decoration: none;
 }
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 0 0 var(--lookn-green-shadow);
-  filter: brightness(1.04);
-}
-.btn:active {
-  transform: translateY(8px);
-  box-shadow: 0 0 0 0 var(--lookn-green-shadow);
-  transition-duration: var(--btn-press);
-}
-.btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.btn--primary:hover { box-shadow: 0 10px 0 0 var(--lookn-green-shadow); filter: brightness(1.04); }
+.btn--primary:active { transform: translateY(8px); box-shadow: 0 0 0 0 var(--lookn-green-shadow); }
 .btn--full { width: 100%; }
 
+/* --- Chip (sub-page nav, footer links) ----------------------- */
+/* Default: white surface, black text, neutral shadow. Hover
+   flips to the primary green recipe — same "lifts to brand" feel
+   as the footer social chips. No green border, no green text in
+   the rest state. */
+.btn--chip {
+  height: 40px;
+  padding: 0 18px;
+  border-radius: var(--r-pill-sm);
+  font-size: 14px;
+  color: #1A1A1A;
+  background: #fff;
+  box-shadow: 0 5px 0 0 #E8E8E8;
+}
+.btn--chip:hover {
+  background: var(--lookn-green);
+  color: #fff;
+  box-shadow: 0 7px 0 0 var(--lookn-green-shadow);
+}
+.btn--chip:active {
+  transform: translateY(5px);
+  box-shadow: 0 0 0 0 var(--lookn-green-shadow);
+}
+
+/* --- Store badge wrapper (App Store / Google Play) ----------- */
 .btn--store {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   height: 56px;
   padding: 0;
-  border: 0;
   border-radius: var(--r-md);
   background: transparent;
   box-shadow: 0 5px 0 0 #1A1A1A;
-  transform: translateY(0);
-  transition:
-    transform var(--btn-spring),
-    box-shadow var(--btn-spring);
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
   overflow: hidden;
 }
-.btn--store:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 7px 0 0 #1A1A1A;
-}
-.btn--store:active {
-  transform: translateY(5px);
-  box-shadow: 0 0 0 0 #1A1A1A;
-  transition-duration: var(--btn-press);
-}
-.btn--store:focus-visible { outline: 3px solid var(--lookn-green); outline-offset: 3px; }
+.btn--store:hover { box-shadow: 0 7px 0 0 #1A1A1A; }
+.btn--store:active { transform: translateY(5px); box-shadow: 0 0 0 0 #1A1A1A; }
 .btn--store img {
   display: block;
   height: 56px;
   width: auto;
   border-radius: var(--r-md);
 }
-
-/* Chip button — SmartButton 'gray' variant (Lookn RN client):
-   bg #F0F0F0 + solid darker shadow #D7D7D7 + text #666. Flat,
-   no blur, just bg + shadow stub like the in-app buttons. */
-.btn--chip {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  padding: 0 18px;
-  border: 0;
-  border-radius: var(--r-pill-sm);
-  background: #F0F0F0;
-  color: #666;
-  font-family: "Fredoka", sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  box-shadow: 0 5px 0 0 #D7D7D7;
-  transform: translateY(0);
-  transition:
-    transform var(--btn-spring),
-    box-shadow var(--btn-spring),
-    color 100ms ease-out;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  text-decoration: none;
-}
-.btn--chip:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 7px 0 0 #D7D7D7;
-  color: var(--lookn-green-shadow);
-}
-.btn--chip:active {
-  transform: translateY(5px);
-  box-shadow: 0 0 0 0 #D7D7D7;
-  transition-duration: var(--btn-press);
-}
-.btn--chip:focus-visible { outline: 3px solid var(--lookn-green); outline-offset: 3px; }
 
 /* ============================================================
    Sub-pages — Privacy / Terms / Support
@@ -548,7 +527,7 @@ body {
 }
 .shell ul { padding-left: 22px; }
 .shell li { margin-bottom: 6px; }
-.shell a {
+.shell a:not([class]) {
   color: var(--lookn-green-shadow);
   font-weight: 500;
   border-bottom: 1px solid currentColor;
@@ -730,10 +709,6 @@ body {
   font-weight: 500;
 }
 
-/* SmartButton recipe — circular social chip. Matches the in-app
-   `gray` variant: bg #F0F0F0, solid #D7D7D7 shadow stub, #666
-   icon color. On hover the icon shifts to the brand green so it
-   feels alive without breaking the SmartButton flat shadow rule. */
 .footer__social {
   list-style: none;
   margin: 0;
@@ -743,37 +718,21 @@ body {
   gap: 10px;
 }
 .btn--social {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #F0F0F0;
-  color: #666;
-  box-shadow: 0 4px 0 0 #D7D7D7;
-  transform: translateY(0);
-  transition:
-    transform var(--btn-spring),
-    box-shadow var(--btn-spring),
-    background-color 120ms ease,
-    color 120ms ease;
-  -webkit-tap-highlight-color: transparent;
+  color: #1A1A1A;
+  background: #fff;
+  box-shadow: 0 4px 0 0 #E8E8E8;
 }
 .btn--social:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 0 0 var(--lookn-green-shadow);
   background: var(--lookn-green);
   color: #fff;
+  box-shadow: 0 6px 0 0 var(--lookn-green-shadow);
 }
 .btn--social:active {
   transform: translateY(4px);
   box-shadow: 0 0 0 0 var(--lookn-green-shadow);
-  transition-duration: var(--btn-press);
-}
-.btn--social:focus-visible {
-  outline: 3px solid var(--lookn-green);
-  outline-offset: 3px;
 }
 .btn--social svg { display: block; }
 
