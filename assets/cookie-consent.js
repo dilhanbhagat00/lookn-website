@@ -42,9 +42,9 @@
         '<a href="/privacy.html">Read more</a>',
       "</p>",
       '<div class="cookie-banner__actions">',
-        '<button type="button" class="cookie-btn cookie-btn--ghost" data-cookie="decline">Reject all</button>',
-        '<button type="button" class="cookie-btn cookie-btn--ghost" data-cookie="settings">Cookie settings</button>',
-        '<button type="button" class="cookie-btn cookie-btn--primary" data-cookie="accept">Accept all</button>',
+        '<button type="button" class="cookie-btn cookie-btn--ghost" data-cookie="decline">Reject</button>',
+        '<button type="button" class="cookie-btn cookie-btn--ghost" data-cookie="settings">Customize</button>',
+        '<button type="button" class="cookie-btn cookie-btn--primary" data-cookie="accept">Accept</button>',
       "</div>"
     ].join("");
     document.body.appendChild(banner);
