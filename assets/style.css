@@ -124,26 +124,32 @@ body::-webkit-scrollbar-thumb:hover {
 }
 .cookie-banner__actions {
   display: flex;
-  gap: 8px;
-  justify-content: flex-end;
+  flex-wrap: nowrap;
+  gap: 6px;
   align-items: center;
-  flex-wrap: wrap;
 }
 
 /* Cookie buttons — SmartButton recipe (solid surface + flat stub shadow,
-   press to flat). Self-contained styles instead of inheriting from
-   .btn--* because the banner has its own scale. */
+   press to flat). Self-contained because the banner has its own scale.
+   Buttons share the row equally on mobile (flex:1) so they never wrap;
+   on tablet+ they snap back to content-driven width. */
 .cookie-btn {
+  flex: 1 1 0;
+  min-width: 0;
   height: 44px;
-  padding: 0 20px;
+  padding: 0 10px;
   border: 0;
   border-radius: 999px;
   font-family: "Fredoka", sans-serif;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13px;
+  letter-spacing: -0.005em;
   cursor: pointer;
   background: transparent;
   color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   transition:
     background-color 160ms ease,
     box-shadow var(--btn-spring),
@@ -186,6 +192,15 @@ body::-webkit-scrollbar-thumb:hover {
   box-shadow: 0 0 0 0 var(--lookn-green-shadow);
 }
 
+@media (min-width: 360px) {
+  .cookie-btn { font-size: 13.5px; padding: 0 12px; }
+  .cookie-banner__actions { gap: 7px; }
+}
+@media (min-width: 420px) {
+  .cookie-btn { font-size: 14px; padding: 0 16px; }
+  .cookie-banner__actions { gap: 8px; }
+}
+
 @media (min-width: 640px) {
   .cookie-banner {
     right: auto;
@@ -196,6 +211,8 @@ body::-webkit-scrollbar-thumb:hover {
   }
   .cookie-banner__title { font-size: 17px; }
   .cookie-banner__msg { font-size: 14px; margin-bottom: 16px; }
+  .cookie-banner__actions { justify-content: flex-end; }
+  .cookie-btn { flex: 0 0 auto; padding: 0 20px; }
 }
 
 /* Cookie settings modal (opens from "Cookie settings" button) */
