@@ -42,7 +42,7 @@ Recipe — bg + solid **flat** shadow stub (no `rgba()` blur, no
 | `.btn--primary` (primary)  | `#66CE63` | `#3AB54A` | `#FFFFFF` | the green CTA, 404 back link  |
 | `.btn--chip`    (white)    | `#FFFFFF` | `#E8E8E8` | `#1A1A1A` | sub-page nav, footer links    |
 | `.btn--social`  (white)    | `#FFFFFF` | `#E8E8E8` | `#1A1A1A` | circular footer social icons  |
-| `.btn--store`   (apple)    | `transparent` (badge image) | `#1A1A1A` | n/a       | App Store / Play Store badges |
+| `.btn--store`   (dark)     | `#000000`   | none      | `#FFFFFF` | App Store / Play Store CTAs   |
 
 **Hover** for the white-base variants (`.btn--chip`, `.btn--social`) **flips to
 the primary green**: `background: var(--lookn-green); color: #fff;
